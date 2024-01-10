@@ -33,16 +33,21 @@ const showMessage = (message, sender) => {
 
 // options for the function after
 const decideIfInterested = (decision) => {
-  if (decision === "yes") {
-    showMessage("Great, please provide your name.", "bot");
-  } else if (decision === "no") {
-    showMessage("Ok. Bye", "bot");
+  showMessage(decision, "user");
 
-  // Remove the 'yes' and 'no' buttons
-    const decisionButtons = document.getElementById('decision-buttons');
+//   if (decision.toLowerCase() === "yes") {
+//     setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
+
+  if (decision === "Yes") {
+    setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
+  } else if (decision === "No") {
+    setTimeout(() => showMessage("Ok. Bye", "bot"), 1000);
+
+    // Remove the 'yes' and 'no' buttons
+    const decisionButtons = document.getElementById("decision-buttons");
     decisionButtons.parentNode.removeChild(decisionButtons);
-  
-    // If not interested, two buttons (choices) appears 
+
+    // If not interested, two buttons (choices) appears
     const inputWrapperLink = document.getElementById("input-wrapper");
     inputWrapperLink.innerHTML += `
         <form action="https://arbetsformedlingen.se/other-languages/english-engelska" target="_blank">
@@ -67,10 +72,11 @@ const askIfInterested = () => {
   const inputWrapperButton = document.getElementById("input-wrapper");
   inputWrapperButton.innerHTML += `
     <div id="decision-buttons">
-      <button onclick="decideIfInterested('yes')">Yes</button>
-      <button onclick="decideIfInterested('no')">No</button>
+      <button onclick="decideIfInterested('Yes')">Yes</button>
+      <button onclick="decideIfInterested('No')">No</button>
     </div>
     `;
+
 };
 
 const handleNameInput = (event) => {
