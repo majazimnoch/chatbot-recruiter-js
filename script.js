@@ -36,16 +36,16 @@ const showMessage = (message, sender) => {
 const decideIfInterested = (decision) => {
   showMessage(decision, "user");
 
-//   if (decision.toLowerCase() === "yes") {
-//     setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
+  //   if (decision.toLowerCase() === "yes") {
+  //     setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
 
-if (decision === "Yes") {
+  if (decision === "Yes") {
     setTimeout(() => {
       showMessage("Great! What's your full name?", "bot");
 
-    // Remove the 'yes' and 'no' buttons
-    const decisionButtons = document.getElementById("decision-buttons");
-    decisionButtons.parentNode.removeChild(decisionButtons);
+      // Remove the 'yes' and 'no' buttons
+      const decisionButtons = document.getElementById("decision-buttons");
+      decisionButtons.parentNode.removeChild(decisionButtons);
 
       // Add an input form for the user's name
       const inputWrapperInput = document.getElementById("input-wrapper");
@@ -58,14 +58,12 @@ if (decision === "Yes") {
         </div>
       `;
     }, 1000);
-    
   } else if (decision === "No") {
     setTimeout(() => showMessage("Ok. Bye", "bot"), 1000);
 
     // Remove the 'yes' and 'no' buttons
     const decisionButtons = document.getElementById("decision-buttons");
     decisionButtons.parentNode.removeChild(decisionButtons);
-
 
     // If not interested, two buttons (choices) appears
     const inputWrapperLink = document.getElementById("input-wrapper");
@@ -96,73 +94,132 @@ const askIfInterested = () => {
       <button onclick="decideIfInterested('No')">No</button>
     </div>
     `;
-
 };
 
 const handleNameInput = (event) => {
-    event.preventDefault();
-    const nameInput = document.getElementById("nameInput");
-    let name = nameInput.value;
-    // Capitalize the first letter
-    name = name.charAt(0).toUpperCase() + name.slice(1);
-    showMessage(name, "user");
-    nameInput.value = "";
-  
-    // After 1 second, ask for the user's email
-    setTimeout(() => askForEmail(name), 1000);
-  };
-  
-  const askForEmail = (name) => {
-    showMessage(`Nice to meet you ${name}! What's your email address?`, "bot");
-  
-    // Clearing the existing content of the email input form
-    const inputWrapperEmail = document.getElementById("input-wrapper");
-    inputWrapperEmail.innerHTML = '';
-  
-    // Add an input form for the user's email
-    inputWrapperEmail.innerHTML += `
-      <div id="email-input-form">
+  event.preventDefault();
+  const nameInput = document.getElementById("nameInput");
+  let name = nameInput.value;
+  // Capitalize the first letter
+  name = name.charAt(0).toUpperCase() + name.slice(1);
+  showMessage(name, "user");
+  nameInput.value = "";
+
+  // After 1 second, ask for the user's email
+  setTimeout(() => askForEmail(name), 1000);
+};
+
+const askForEmail = (name) => {
+  showMessage(`Nice to meet you ${name}! What's your email address?`, "bot");
+
+  // Clearing the existing content of the email input form
+  const inputWrapperEmail = document.getElementById("input-wrapper");
+  inputWrapperEmail.innerHTML = "";
+
+  // Add an input form for the user's email
+  inputWrapperEmail.innerHTML += `
+      <div class="input-form" id="email-input-form">
         <form onsubmit="handleEmailInput(event)">
           <input type="email" id="emailInput" />
           <button type="submit">Submit</button>
         </form>
       </div>
     `;
+};
+
+const handleEmailInput = (event) => {
+  event.preventDefault();
+  const emailInput = document.getElementById("emailInput");
+  const email = emailInput.value.trim();
+
+  if (email !== "") {
+    showMessage(email, "user");
+    emailInput.value = "";
+
+    // After 1 second, show the next question or interaction by invoking the next function.
+    // Pass the email along if needed.
+    setTimeout(() => whichRole(email), 1000);
+  } else {
+    // Handle the case where the user submits an empty email
+    showMessage("Please provide a valid email address.", "bot");
+  }
+};
+
+// Inside showNextQuestion function, handle the next question or interaction with the user
+const whichRole = (email) => {
+  showMessage(`${email} registered! What role are you applying for?`, "bot");
+
+  // Remove the existing input form
+  const inputWrapper = document.getElementById("input-wrapper");
+  inputWrapper.innerHTML = "";
+
+  // Add three buttons for the user to choose from
+  inputWrapper.innerHTML += `
+    <div id="role-buttons">
+      <button onclick="chooseRole('Senior Art Director')">Senior Art Director</button>
+      <button onclick="chooseRole('Managing Partner')">Managing Partner</button>
+      <button onclick="chooseRole('Client Accountant')">Client Accountant</button>
+    </div>
+  `;
+};
+
+const chooseRole = (role) => {
+  showMessage(`${role}`, "user");
+
+  // Remove the existing input form
+  const inputWrapper = document.getElementById("input-wrapper");
+  inputWrapper.innerHTML = "";
+
+  if (role === "Senior Art Director") {
+    setTimeout(() => sadQuestion(), 1000);
+  } else if (role === "Managing Partner") {
+    setTimeout(() => mpQuestion(), 1000);
+  } else if (role === "Client Accountant") {
+    setTimeout(() => caQuestion(), 1000);
+  }
+
+  const sadQuestion = () => {
+    showMessage("Do you have experience leading a team of creatives?", "bot");
+
+    inputWrapper.innerHTML += `
+    <div id="role-buttons">
+        <button onclick="chooseRole('yes')">Yes</button>
+        <button onclick="chooseRole('no')">No</button>
+    </div>
+`;
+
   };
-  
-  const handleEmailInput = (event) => {
-    event.preventDefault();
-    const emailInput = document.getElementById("emailInput");
-    const email = emailInput.value.trim();
-  
-    if (email !== "") {
-      showMessage(email, "user");
-      emailInput.value = "";
-  
-      // After 1 second, show the next question or interaction by invoking the next function.
-      // Pass the email along if needed.
-      setTimeout(() => showNextQuestion(email), 1000);
-    } else {
-      // Handle the case where the user submits an empty email
-      showMessage("Please provide a valid email address.", "bot");
-    }
+  // For example, you might want to ask another question or show relevant information
+  // setTimeout(() => showNextQuestion(role), 1000);
+
+  const mpQuestion = () => {
+    showMessage("Do you have experience managing creative agencies?", "bot");
+
+    inputWrapper.innerHTML += `
+    <div id="role-buttons">
+        <button onclick="chooseRole('yes')">Yes</button>
+        <button onclick="chooseRole('no')">No</button>
+    </div>
+`;
   };
-  
-  // ... (Your existing code)
-  
-  // Inside showNextQuestion function, handle the next question or interaction with the user
-  const showNextQuestion = (email) => {
-    // Modify this function to handle the next question or interaction with the user
-    // using the user's email (email).
+
+  const caQuestion = () => {
+    showMessage("Do you have experience working with campaigns?", "bot");
+
+    inputWrapper.innerHTML += `
+    <div id="role-buttons">
+        <button onclick="chooseRole('yes')">Yes</button>
+        <button onclick="chooseRole('no')">No</button>
+    </div>
+`;
   };
-  
-  // ... (Your existing code)
-  
-  // Eventlisteners go here
-  // Here we invoke the first function to get the chatbot to ask the first question when
-  // the website is loaded. Normally we invoke functions like this: greeting()
-  // To add a little delay to it, we can wrap it in a setTimeout (a built-in JavaScript function):
-  // and pass along two arguments:
-  // 1.) the function we want to delay, and 2.) the delay in milliseconds
-  // This means the greeting function will be called one second after the website is loaded.
-  setTimeout(askIfInterested, 1000);
+};
+
+// Eventlisteners go here
+// Here we invoke the first function to get the chatbot to ask the first question when
+// the website is loaded. Normally we invoke functions like this: greeting()
+// To add a little delay to it, we can wrap it in a setTimeout (a built-in JavaScript function):
+// and pass along two arguments:
+// 1.) the function we want to delay, and 2.) the delay in milliseconds
+// This means the greeting function will be called one second after the website is loaded.
+setTimeout(askIfInterested, 1000);
