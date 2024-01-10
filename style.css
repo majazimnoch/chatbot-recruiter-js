@@ -113,12 +113,18 @@
   .input-wrapper {
     display: flex;
     justify-content: center;
+    gap: 10px;
   }
   
   .input-wrapper form {
     width: 100%;
     display: flex;
     align-items: center;
+  }
+
+  .input-wrapper-buttons {
+    display: flex;
+    justify-content: center;
   }
   
   label {
