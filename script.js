@@ -30,20 +30,46 @@ const showMessage = (message, sender) => {
   // be shown in the chat box
   chat.scrollTop = chat.scrollHeight
 }
-const askIfInterested = () => {
-  showMessage("Hello there, are you interested in the recruitment process for Create&Cry Agency?", 'bot')
+
+// options for the function after
+const decideIfInterested = (decision) => {
+    if (decision === 'yes') {
+        showMessage("Great, please provide your name.", 'bot')
+    } else if (decision === 'no') {
+        showMessage("Ok. Bye", 'bot')
+    }
 }
 
 // A function to start the conversation
-const greetUser = () => {
-  // Here we call the function showMessage, that we declared earlier with the argument:
-  // "Hello there, what's your name?" for message, and the argument "bot" for sender
-  showMessage("Hello there, what's your name?", 'bot')
-}
-const nameUser = () => {
-  showMessage("Hi, my name is ", "user")
-}
-// Eventlisteners goes here :point_down:
+const askIfInterested = () => {
+    showMessage("Hello there, are you interested in the recruitment process for Create&Cry Agency?", 'bot')
+  
+    const inputWrapperButton = document.getElementById('input-wrapper');
+    inputWrapperButton.innerHTML += `
+    <div id="decision-buttons">
+      <button onclick="decideIfInterested('yes')">Yes</button>
+      <button onclick="decideIfInterested('no')">No</button>
+    </div>
+    `;
+  }
+
+
+const handleNameInput = (event) => {
+    event.preventDefault()
+    // Store the value in a variable so we can access it after we 
+      // clear it from the input
+    const name = nameInput.value
+    showMessage(name, 'user')
+    nameInput.value = ''
+  
+    // After 1 second, show the next question by invoking the next function.
+      // passing the name into it to have access to the user's name if we want
+      // to use it in the next question from the bot.
+    setTimeout(() => showFoodOptions(name), 1000)
+  }
+
+
+// Eventlisteners goes here
 // Here we invoke the first function to get the chatbot to ask the first question when
 // the website is loaded. Normally we invoke functions like this: greeting()
 // To add a little delay to it, we can wrap it in a setTimeout (a built in JavaScript function):
