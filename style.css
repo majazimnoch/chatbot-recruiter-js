@@ -154,3 +154,19 @@
     opacity: 0.9;
     transition: all 0.2s ease;
   }
+
+  #name-input-form {
+    width: 100%;
+    margin-top: 10px; 
+  }
+  
+  #name-input-form form {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  #nameInput {
+    flex: 1;
+    padding: 16px 20px;
+  }
+  

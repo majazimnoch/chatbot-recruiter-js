@@ -38,14 +38,33 @@ const decideIfInterested = (decision) => {
 //   if (decision.toLowerCase() === "yes") {
 //     setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
 
-  if (decision === "Yes") {
-    setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
+if (decision === "Yes") {
+    setTimeout(() => {
+      showMessage("Great, please provide your name.", "bot");
+
+    // Remove the 'yes' and 'no' buttons
+    const decisionButtons = document.getElementById("decision-buttons");
+    decisionButtons.parentNode.removeChild(decisionButtons);
+
+      // Add an input form for the user's name
+      const inputWrapperInput = document.getElementById("input-wrapper");
+      inputWrapperInput.innerHTML += `
+        <div id="name-input-form">
+          <form onsubmit="handleNameInput(event)">
+            <input type="text" id="nameInput" placeholder="Your Name" required />
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      `;
+    }, 1000);
+    
   } else if (decision === "No") {
     setTimeout(() => showMessage("Ok. Bye", "bot"), 1000);
 
     // Remove the 'yes' and 'no' buttons
     const decisionButtons = document.getElementById("decision-buttons");
     decisionButtons.parentNode.removeChild(decisionButtons);
+
 
     // If not interested, two buttons (choices) appears
     const inputWrapperLink = document.getElementById("input-wrapper");
@@ -81,8 +100,7 @@ const askIfInterested = () => {
 
 const handleNameInput = (event) => {
   event.preventDefault();
-  // Store the value in a variable so we can access it after we
-  // clear it from the input
+  const nameInput = document.getElementById("nameInput");
   const name = nameInput.value;
   showMessage(name, "user");
   nameInput.value = "";
