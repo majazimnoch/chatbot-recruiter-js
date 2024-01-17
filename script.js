@@ -240,17 +240,26 @@ const answerExperience = (response) => {
   }
 };
 
+const finalMessage = () => {
+
+   // Remove the existing input form
+   const inputWrapper = document.getElementById("input-wrapper");
+   inputWrapper.innerHTML = "";
+   
+  showMessage("Thank you. One of our Talent Managers will contact you in no time.", "bot");
+};
+
 const handleSalaryInput = (event) => {
   event.preventDefault();
-  const salaryInput = document.getElementById("salaryInput"); // Corrected ID
+  const salaryInput = document.getElementById("salaryInput");
   const salary = salaryInput.value.trim();
 
   if (salary !== "") {
     showMessage(`Salary expectations: ${salary}`, "user");
     salaryInput.value = "";
-
-    // After showing salary expectations, call the final message function
-    setTimeout(() => finalMessage(), 1000);
+    setTimeout(() => {
+      finalMessage();
+    }, 1000);
   } else {
     showMessage("Please, provide your salary expectations", "bot");
   }
@@ -272,12 +281,6 @@ const salaryExpectation = () => {
       </form>
     </div>
     `;
-};
-
-const finalMessage = () => {
-  showMessage("Thank you for taking your time to answer this questions!");
-  showMessage("We think that you are a brilliant candidate!");
-  showMessage("One of our Talent Managers will contact your in no time");
 };
 
 // Here we invoke the first function to get the chatbot to ask the first question when
