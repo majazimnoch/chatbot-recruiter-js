@@ -235,7 +235,7 @@ const answerExperience = (response) => {
         // Close the window after a delay (you may need to adjust the delay based on your needs)
         setTimeout(() => {
           window.close();
-          }, 3000);
+          }, 5000);
 
   }
 
