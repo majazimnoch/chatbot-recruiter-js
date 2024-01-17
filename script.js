@@ -183,24 +183,21 @@ const chooseRole = (role) => {
 
     inputWrapper.innerHTML += `
     <div id="role-buttons">
-        <button onclick="chooseRole('yes')">Yes</button>
-        <button onclick="chooseRole('no')">No</button>
+        <button onclick="answerExperience('yes')">Yes</button>
+        <button onclick="answerExperience('no')">No</button>
     </div>
-`;
-
+    `;
   };
-  // For example, you might want to ask another question or show relevant information
-  // setTimeout(() => showNextQuestion(role), 1000);
 
   const mpQuestion = () => {
     showMessage("Do you have experience managing creative agencies?", "bot");
 
     inputWrapper.innerHTML += `
     <div id="role-buttons">
-        <button onclick="chooseRole('yes')">Yes</button>
-        <button onclick="chooseRole('no')">No</button>
+        <button onclick="answerExperience('yes')">Yes</button>
+        <button onclick="answerExperience('no')">No</button>
     </div>
-`;
+    `;
   };
 
   const caQuestion = () => {
@@ -208,14 +205,82 @@ const chooseRole = (role) => {
 
     inputWrapper.innerHTML += `
     <div id="role-buttons">
-        <button onclick="chooseRole('yes')">Yes</button>
-        <button onclick="chooseRole('no')">No</button>
+        <button onclick="answerExperience('yes')">Yes</button>
+        <button onclick="answerExperience('no')">No</button>
     </div>
-`;
+    `;
   };
 };
 
-// Eventlisteners go here
+const answerExperience = (response) => {
+  showMessage(response, "user");
+
+  if (response === "yes") {
+    // If the user has experience, ask about salary expectations
+    setTimeout(() => salaryExpectation(), 1000);
+  } else {
+    // Remove the existing input form
+    const inputWrapper = document.getElementById("input-wrapper");
+    inputWrapper.innerHTML = "";
+    // Handle the case where the user does not have experience
+    showMessage(
+      "Thank you for sharing your experience with us. We look for someone with experience with that field so we will not consider your application.",
+      "bot"
+    );
+
+    setTimeout(() => {
+      showMessage("You can now leave the page.", "bot");
+    }, 2000),
+
+        // Close the window after a delay (you may need to adjust the delay based on your needs)
+        setTimeout(() => {
+          window.close();
+          }, 3000);
+
+  }
+
+  }
+
+const handleSalaryInput = (event) => {
+  event.preventDefault();
+  const salaryInput = document.getElementById("salaryInput"); // Corrected ID
+  const salary = salaryInput.value.trim();
+
+  if (salary !== "") {
+    showMessage(`Salary expectations: ${salary}`, "user");
+    salaryInput.value = "";
+
+    // After showing salary expectations, call the final message function
+    setTimeout(() => finalMessage(), 1000);
+  } else {
+    showMessage("Please, provide your salary expectations", "bot");
+  }
+};
+
+const salaryExpectation = () => {
+  showMessage("What's your salary expectations? In local currency", "bot");
+
+  // Remove the existing input form
+  const inputWrapper = document.getElementById("input-wrapper");
+  inputWrapper.innerHTML = "";
+
+  const salaryWrapper = document.getElementById("input-wrapper");
+  salaryWrapper.innerHTML += `
+    <div id="input-salary">
+      <form onsubmit="handleSalaryInput(event)">
+        <input type="text" id="salaryInput" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    `;
+};
+
+const finalMessage = () => {
+  showMessage("Thank you for taking your time to answer this questions!");
+  showMessage("We think that you are a brilliant candidate!");
+  showMessage("One of our Talent Managers will contact your in no time");
+};
+
 // Here we invoke the first function to get the chatbot to ask the first question when
 // the website is loaded. Normally we invoke functions like this: greeting()
 // To add a little delay to it, we can wrap it in a setTimeout (a built-in JavaScript function):
