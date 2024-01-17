@@ -222,24 +222,23 @@ const answerExperience = (response) => {
     // Remove the existing input form
     const inputWrapper = document.getElementById("input-wrapper");
     inputWrapper.innerHTML = "";
+
     // Handle the case where the user does not have experience
     showMessage(
-      "Thank you for sharing your experience with us. We look for someone with experience with that field so we will not consider your application.",
+      "Thank you for sharing your experience with us. We look for someone with experience in that field, so we will not consider your application.",
       "bot"
     );
 
+    // Show the additional message for 3 seconds and then redirect
     setTimeout(() => {
-      showMessage("You can now leave the page.", "bot");
-    }, 2000),
-
-        // Close the window after a delay (you may need to adjust the delay based on your needs)
-        setTimeout(() => {
-          window.close();
-          }, 5000);
-
+      showMessage("You will now be redirected to another page.", "bot");
+      
+      setTimeout(() => {
+        window.location.href = "https://arbetsformedlingen.se/other-languages/english-engelska";
+      }, 3000);
+    }, 5000);
   }
-
-  }
+};
 
 const handleSalaryInput = (event) => {
   event.preventDefault();
@@ -258,7 +257,7 @@ const handleSalaryInput = (event) => {
 };
 
 const salaryExpectation = () => {
-  showMessage("What's your salary expectations? In local currency", "bot");
+  showMessage("What's your monthly salary expectation? In Swedish krona", "bot");
 
   // Remove the existing input form
   const inputWrapper = document.getElementById("input-wrapper");

@@ -176,4 +176,19 @@
     margin-top: 10px; 
   }
   
- 
+  #input-salary {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  #input-salary form {
+    display: flex;
+    flex-direction: row;
+    width: 100%; /* Set the width to 100% */
+  }
+  
+  #salaryInput {
+    flex: 1;
+    padding: 16px 20px;
+    width: 100%; /* Set the width to 100% */
+  }
