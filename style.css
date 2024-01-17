@@ -1,27 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&display=swap');
+
 * {
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+  }
+
+  :root {
+    --primary-color: #06292d;
+    --secondary-color: #f0f6f7;
+    --background-color: #aa75ba;
+    --text-color: #110303;
   }
   
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #0026ff;
+    background: var(--primary-color);
+    background-image: url('/assets/gradient.jpg');
+    background-size: cover;
   }
   
   h1 {
     font-weight: bold;
     font-size: 28px;
     line-height: 34px;
-    color: #fff;
+    color: var(--background-color);
     text-align: center;
+    padding: 25px 0;
   }
   
   h2 {
     font-weight: bold;
     font-size: 24px;
     line-height: 34px;
-    color: #fff;
+    color: var(--background-color);
     text-align: center;
     margin-bottom: 36px;
   }
@@ -37,8 +49,8 @@
     box-sizing: border-box;
     border: none;
     border-radius: 4px 0 0 4px;
-    background: #e5e9ff;
-    color: #0026ff;
+    background: var(--secondary-color);
+    color: var(--primary-color);
     padding: 16px;
     font-size: 16px;
     font-family: 'Montserrat';
@@ -53,8 +65,9 @@
     width: 100%;
     max-width: 700px;
     height: 600px;
-    border-radius: 30px;
-    background: #fff;
+    border: 1px black solid;
+    border-radius: 2px;
+    background: var(--background-color);
     padding: 20px 24px;
     padding-top: 0;
     box-sizing: border-box;
@@ -84,19 +97,23 @@
     flex-shrink: 0;
   }
   
-  .bot-msg img,
-  .user-msg img {
+  .bot-msg img {
     width: 60px;
     height: 60px;
   }
+
+  .user-msg img {
+    width: 80px;
+    height: 80px;
+  }
   
   .bubble {
-    background: #e5e9ff;
+    background: var(--secondary-color);
     font-weight: 600;
     font-size: 16px;
     line-height: 26px;
     padding: 16px 24px;
-    color: #0026ff;
+    color: var(--primary-color);
     max-width: 40%;
   }
   
@@ -131,20 +148,19 @@
     font-size: 16px;
     font-family: 'Montserrat';
     font-weight: 500;
-    color: #0026ff;
+    color: var(--primary-color);
     margin-right: 20px;
   }
   
   button {
-    background-color: #0026ff;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px;
     padding: 16px 20px;
     margin-right: 4px;
     font-size: 16px;
     line-height: 26px;
-    font-family: 'Montserrat';
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
