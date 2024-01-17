@@ -53,7 +53,6 @@
     color: var(--primary-color);
     padding: 16px;
     font-size: 16px;
-    font-family: 'Montserrat';
     font-weight: 600;
     line-height: 26px;
     flex: 1;
@@ -146,7 +145,6 @@
   
   label {
     font-size: 16px;
-    font-family: 'Montserrat';
     font-weight: 500;
     color: var(--primary-color);
     margin-right: 20px;
@@ -164,10 +162,11 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    opacity: 1;
   }
   
   button:hover {
-    opacity: 0.9;
+    opacity: 0.8;
     transition: all 0.2s ease;
   }
 
@@ -200,11 +199,11 @@
   #input-salary form {
     display: flex;
     flex-direction: row;
-    width: 100%; /* Set the width to 100% */
+    width: 100%; 
   }
   
   #salaryInput {
     flex: 1;
     padding: 16px 20px;
-    width: 100%; /* Set the width to 100% */
+    width: 100%;
   }
