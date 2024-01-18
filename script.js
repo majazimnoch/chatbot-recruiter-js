@@ -1,11 +1,8 @@
-// DOM selectors (variables that point to selected DOM elements) goes here :point_down:
 const chat = document.getElementById("chat");
 
-// Functions goes here :point_down:
 // A function that will add a chat bubble in the correct place based on who the sender is
 const showMessage = (message, sender) => {
-  // The if statement checks if the sender is the user and if that's the case it inserts
-  // an HTML section inside the chat with the posted message from the user
+  // The if statement checks if the sender is the user and if that's the case it inserts an HTML section inside the chat with the posted message from the user
   if (sender === "user") {
     chat.innerHTML += `
       <section class="user-msg">
@@ -15,8 +12,7 @@ const showMessage = (message, sender) => {
         <img src="assets/user.png" alt="User" />
       </section>
     `;
-    // The else if statement checks if the sender is the bot and if that's the case it inserts
-    // an HTML section inside the chat with the posted message from the bot
+    // The else if statement checks if the sender is the bot and if that's the case it inserts an HTML section inside the chat with the posted message from the bot
   } else if (sender === "bot") {
     chat.innerHTML += `
       <section class="bot-msg">
@@ -27,17 +23,12 @@ const showMessage = (message, sender) => {
       </section>
     `;
   }
-  // This little thing makes the chat scroll to the last message when there are too many to
-  // be shown in the chat box
+  // This little thing makes the chat scroll to the last message when there are too many to be shown in the chat box
   chat.scrollTop = chat.scrollHeight;
 };
 
-// options for the function after
 const decideIfInterested = (decision) => {
   showMessage(decision, "user");
-
-  //   if (decision.toLowerCase() === "yes") {
-  //     setTimeout(() => showMessage("Great, please provide your name.", "bot"), 1000);
 
   if (decision === "Yes") {
     setTimeout(() => {
@@ -83,7 +74,7 @@ const decideIfInterested = (decision) => {
 // A function to start the conversation
 const askIfInterested = () => {
   showMessage(
-    "Hello there, are you interested in the recruitment process for Create&Cry Agency?",
+    "Hello there, are you interested in the recruitment process for InnovateSphere Agency?",
     "bot"
   );
 

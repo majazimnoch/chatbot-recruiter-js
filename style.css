@@ -15,7 +15,6 @@
   body {
     margin: 0;
     padding: 0;
-    background: var(--primary-color);
     background-image: url('/assets/gradient.jpg');
     background-size: cover;
   }
@@ -185,7 +184,6 @@
     padding: 16px 20px;
   }
   
-
   .input-form {
     width: 100%;
     margin-top: 10px; 
